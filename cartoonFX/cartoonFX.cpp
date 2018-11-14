@@ -53,6 +53,14 @@ void createBar(String winName){
 //单个图片的cartoonFy处理
 Mat cartoonFy(Mat img)
 {
+	//预先进行彩色图的直方图均衡化
+	//***非必要的 结果可能变得奇怪***
+	vector<Mat> bgrs;
+	split(img, bgrs);
+	equalizeHist(bgrs[0],bgrs[0]);
+	equalizeHist(bgrs[1],bgrs[1]);
+	equalizeHist(bgrs[2],bgrs[2]);
+	merge(bgrs, img);
 	//namedWindow("src");
 	//Mat img = imread("..\\test.jpg");
 	//imshow("src",img);
